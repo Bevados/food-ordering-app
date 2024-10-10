@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Cart from './Cart/Cart'
 import Header from './Layout/Header/Header'
 import Meals from './Meals/Meals'
+import CartContextProvider from './store/cart-context/CartContextProvider'
 
 function App() {
 	const [cartIsVisible, setCartISVisible] = useState(false)
@@ -14,13 +15,15 @@ function App() {
 		setCartISVisible(false)
 	}
 	return (
-		<>
-			{cartIsVisible && <Cart onHideCart={hideCartHandler} />}
-			<Header onShowCart={showCartHandler} />
-			<main>
-				<Meals />
-			</main>
-		</>
+		<CartContextProvider>
+			<>
+				{cartIsVisible && <Cart onHideCart={hideCartHandler} />}
+				<Header onShowCart={showCartHandler} />
+				<main>
+					<Meals />
+				</main>
+			</>
+		</CartContextProvider>
 	)
 }
 
