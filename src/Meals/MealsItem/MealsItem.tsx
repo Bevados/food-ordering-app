@@ -1,4 +1,6 @@
+import { useContext } from 'react'
 import MealItemForm from '../MealItemForm/MealItemForm'
+import CartContext from '../../store/cart-context/cart-context'
 import styles from './MealsItem.module.css'
 
 interface MealsItemProps {
@@ -9,7 +11,17 @@ interface MealsItemProps {
 }
 
 const MealsItem = ({ name, description, price, id }: MealsItemProps) => {
+	const context = useContext(CartContext)
 	const formattedPrice = `$${price.toFixed(2)}`
+
+	function addToCartHandler(amount: number) {
+		context.addItem({
+			id: id,
+			name: name,
+			amount: amount,
+			price: price
+		})
+	}
 
 	return (
 		<li className={styles.meal}>
@@ -18,7 +30,7 @@ const MealsItem = ({ name, description, price, id }: MealsItemProps) => {
 				<div className={styles.description}>{description}</div>
 				<div className={styles.price}>{formattedPrice}</div>
 			</div>
-			<MealItemForm id={id} />
+			<MealItemForm onAddToCart={addToCartHandler} id={id} />
 		</li>
 	)
 }

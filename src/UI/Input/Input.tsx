@@ -1,3 +1,4 @@
+import { forwardRef, ForwardedRef } from 'react'
 import styles from './Input.module.css'
 
 interface InputProps {
@@ -9,19 +10,25 @@ interface InputProps {
 	defaultValue?: string
 }
 
-const Input = ({ label, id, type, min, step, defaultValue }: InputProps) => {
-	return (
-		<div className={styles.input}>
-			<label htmlFor={id}>{label}</label>
-			<input
-				id={id}
-				type={type}
-				min={min}
-				step={step}
-				defaultValue={defaultValue}
-			/>
-		</div>
-	)
-}
+const Input = forwardRef(
+	(
+		{ label, id, type, min, step, defaultValue }: InputProps,
+		ref: ForwardedRef<HTMLInputElement>
+	) => {
+		return (
+			<div className={styles.input}>
+				<label htmlFor={id}>{label}</label>
+				<input
+					ref={ref}
+					id={id}
+					type={type}
+					min={min}
+					step={step}
+					defaultValue={defaultValue}
+				/>
+			</div>
+		)
+	}
+)
 
 export default Input

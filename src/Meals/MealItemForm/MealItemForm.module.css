@@ -18,3 +18,9 @@
   background-color: #47035d;
   border-color: #47035d;
 }
+
+.error {
+  margin-top: 1rem;
+  font-size: 14px;
+  color: red
+}
