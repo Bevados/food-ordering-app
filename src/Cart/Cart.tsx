@@ -7,11 +7,11 @@ import CartItem from './CartItem/CartItem'
 
 const Cart = ({ onHideCart }: CartProps) => {
 	const cartContext = useContext(CartContext)
-	const totalAmount = `$${cartContext.totalAmount.toFixed(2)}`
+	const totalAmount = `$${Math.abs(cartContext.totalAmount).toFixed(2)}`
 	const hasItems = cartContext.items.length > 0
 
-	const addCartItemHandler = (item: Item) => {return item}
-	const removeCartItemHandler = (id: string) => {return id}
+	const addCartItemHandler = (item: Item) => {cartContext.addItem({...item, amount: 1})}
+	const removeCartItemHandler = (id: string) => {cartContext.removeItem(id)}
 
 	const cartItems = (
 		<ul className={styles['cart-items']}>

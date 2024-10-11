@@ -18,14 +18,63 @@ const cartReducer = (
 	action: CartActionReducer
 ) => {
 	switch (action.type) {
-		case 'ADD_ITEM':
+		case 'ADD_ITEM': {
+			const existingCartItemIndex = state.items.findIndex(
+				item => item.id === action.item.id
+			)
+			const existingCartItem = state.items[existingCartItemIndex]
+			let updateItems: Item[]
+
+			if (existingCartItem) {
+				const updateItem: Item = {
+					...existingCartItem,
+					amount: existingCartItem.amount + action.item.amount
+				}
+
+				updateItems = [...state.items]
+				updateItems[existingCartItemIndex] = updateItem
+			} else {
+				updateItems = [...state.items, action.item]
+			}
+
 			return {
-				items: [...state.items, action.item],
+				...state,
+				items: [...updateItems],
 				totalAmount: state.totalAmount + action.item.amount * action.item.price
 			}
-	}
+		}
 
-	return InitialCartState
+		case 'REMOVE_ITEM': {
+			const existingCartItemIndex = state.items.findIndex(
+				item => item.id === action.id
+			)
+
+			const existingCartItem = state.items[existingCartItemIndex]
+
+			let updateItems: Item[]
+
+			if (existingCartItem.amount === 1) {
+				updateItems = state.items.filter(item => item.id != existingCartItem.id)
+			} else {
+				const updateItem = {
+					...existingCartItem,
+					amount: existingCartItem.amount - 1
+				}
+
+				updateItems = [...state.items]
+				updateItems[existingCartItemIndex] = updateItem
+			}
+
+			return {
+				...state,
+				items: [...updateItems],
+				totalAmount: state.totalAmount - existingCartItem.price
+			}
+		}
+
+		default:
+			return state
+	}
 }
 
 const CartContextProvider = ({ children }: CartContextProviderProps) => {
