@@ -1,19 +1,27 @@
 import { useContext } from 'react'
 import MealItemForm from '../MealItemForm/MealItemForm'
 import CartContext from '../../store/cart-context/cart-context'
+import { MealsItemProps } from '.'
 import styles from './MealsItem.module.css'
 
-interface MealsItemProps {
-	name: string
-	description: string
-	price: number
-	id: string
-}
-
-const MealsItem = ({ name, description, price, id }: MealsItemProps) => {
+/**
+ * Компонент MealsItem.
+ *
+ * Отображает информацию о конкретном блюде, включая его название, описание и цену.
+ * Также предоставляет форму для добавления блюда в корзину.
+ *
+ * @param {MealsItemProps} props - Пропсы компонента, содержащие информацию о блюде.
+ * @returns {JSX.Element} Элемент списка с информацией о блюде и формой для добавления в корзину.
+ */
+const MealsItem = ({ name, description, price, id }: MealsItemProps): JSX.Element => {
 	const context = useContext(CartContext)
 	const formattedPrice = `$${price.toFixed(2)}`
 
+	/**
+	 * Обработчик добавления блюда в корзину из компонента MealItemForm.
+	 *
+	 * @param {number} amount - Количество добавляемого блюда.
+	 */
 	function addToCartHandler(amount: number) {
 		context.addItem({
 			id: id,

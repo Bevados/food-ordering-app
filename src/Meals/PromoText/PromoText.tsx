@@ -1,6 +1,13 @@
 import styles from './PromoText.module.css'
 
-const PromoText = () => {
+/**
+ * Компонент PromoText.
+ *
+ * Отображает рекламный текст о ресторане "Япона Кухня", включая описание качества блюд и работы команды поваров.
+ *
+ * @returns {JSX.Element} Секция с рекламным текстом о ресторане.
+ */
+const PromoText = (): JSX.Element => {
 	return (
 		<section className={styles['promo-text']}>
 			<h2>Онлайн Суши Ресторан Япона Кухня</h2>

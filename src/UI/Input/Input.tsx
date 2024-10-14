@@ -1,15 +1,17 @@
 import { forwardRef, ForwardedRef } from 'react'
+import { InputProps } from '.'
 import styles from './Input.module.css'
 
-interface InputProps {
-	label: string
-	id: string
-	type: 'text' | 'number'
-	min?: string
-	step?: string
-	defaultValue?: string
-}
-
+/**
+ * Компонент Input.
+ *
+ * Отображает поле ввода с меткой.
+ * Позволяет передавать ссылки на элемент input с помощью React.forwardRef.
+ *
+ * @param {InputProps} props - Пропсы компонента, содержащие информацию о поле ввода.
+ * @param {ForwardedRef<HTMLInputElement>} ref - Ссылка на элемент input.
+ * @returns {JSX.Element} Поле ввода с меткой.
+ */
 const Input = forwardRef(
 	(
 		{ label, id, type, min, step, defaultValue }: InputProps,

@@ -2,6 +2,9 @@ import Card from '../../UI/Card/Card'
 import MealsItem from '../MealsItem/MealsItem'
 import styles from './MealsList.module.css'
 
+/**
+ * Массив с данными о блюдах для отображения в меню.
+ */
 const DUMMY_MEALS = [
 	{
 		id: 'm1',
@@ -31,7 +34,15 @@ const DUMMY_MEALS = [
 	}
 ]
 
-const MealsList = () => {
+/**
+ * Компонент MealsList.
+ *
+ * Отображает список блюд в виде отдельных элементов меню, используя компонент MealsItem.
+ * Блюда берутся из заранее подготовленного массива данных `DUMMY_MEALS`.
+ *
+ * @returns {JSX.Element} Секция с карточкой, содержащей список блюд.
+ */
+const MealsList = (): JSX.Element => {
 	const mealList = DUMMY_MEALS.map(meal => (
 		<MealsItem
 			key={meal.id}

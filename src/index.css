@@ -1,8 +1,54 @@
 * {
-  box-sizing: border-box;
-  margin: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    box-sizing: border-box;
 }
 
+/* Блочные элементы */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+
+/* Скрытие для старого браузера */
+audio, canvas, video {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+}
+
+/* Убрать линии под ссылками */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Упорядоченные и неупорядоченные списки */
+ol, ul {
+    list-style: none;
+}
+
+/* Общие настройки */
 body {
-  margin: 0;
+    line-height: 1;
+}
+
+/* Таблицы */
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+blockquote, q {
+    quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
 }

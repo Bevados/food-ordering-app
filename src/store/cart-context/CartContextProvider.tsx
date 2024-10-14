@@ -5,14 +5,24 @@ import {
 	CartContextType,
 	InitialCartStateType,
 	Item
-} from '../types'
+} from '.'
 import CartContext from './cart-context'
 
+/**
+ * Начальное состояние корзины.
+ */
 const InitialCartState: InitialCartStateType = {
 	items: [],
 	totalAmount: 0
 }
 
+/**
+ * Редьюсер для управления состоянием корзины.
+ *
+ * @param {InitialCartStateType} state - Текущее состояние корзины.
+ * @param {CartActionReducer} action - Действие, которое нужно выполнить.
+ * @returns {InitialCartStateType} Обновленное состояние корзины.
+ */
 const cartReducer = (
 	state: InitialCartStateType,
 	action: CartActionReducer
@@ -77,6 +87,13 @@ const cartReducer = (
 	}
 }
 
+/**
+ * Провайдер контекста корзины.
+ * Оборачивает дочерние компоненты и предоставляет доступ к состоянию корзины и функциям для его управления.
+ *
+ * @param {CartContextProviderProps} props - Пропсы провайдера, содержащие дочерние элементы.
+ * @returns {JSX.Element} Элемент провайдера контекста корзины.
+ */
 const CartContextProvider = ({ children }: CartContextProviderProps) => {
 	const [cartState, dispatchCartState] = useReducer(
 		cartReducer,

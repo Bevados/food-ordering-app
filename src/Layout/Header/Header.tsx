@@ -1,9 +1,17 @@
 import SushiImg from '../../assets/sushi.jpg'
 import HeaderCartButton from '../HeaderCartButton/HeaderCartButton'
-import {HeaderProps} from './Header.types'
+import { HeaderProps } from '.'
 import styles from './Header.module.css'
 
-const Header = ({ onShowCart }: HeaderProps) => {
+/**
+ * Компонент Header.
+ *
+ * Отображает заголовок и кнопку для показа корзины. Также выводит фоновое изображение японской кухни.
+ *
+ * @param {HeaderProps} props - Пропсы компонента, включая функцию для показа корзины.
+ * @returns {JSX.Element} JSX-элемент заголовка с кнопкой и изображением.
+ */
+const Header = ({ onShowCart }: HeaderProps): JSX.Element => {
 	return (
 		<>
 			<header className={styles.header}>

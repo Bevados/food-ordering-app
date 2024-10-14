@@ -1,50 +1,89 @@
-# React + TypeScript + Vite
+# Японская кухня - Онлайн заказ блюд
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Описание проекта
 
-Currently, two official plugins are available:
+Проект представляет собой функциональное веб-приложение для онлайн-заказа блюд японской кухни. Пользователи могут просматривать список доступных блюд с описанием, включая название, состав и стоимость. Также предусмотрен выбор количества блюд от 1 до 10 и возможность добавления выбранных блюд в корзину. В корзине отображается список заказанных блюд с указанием их количества и общей стоимости, а также доступны кнопки для увеличения или уменьшения количества блюд.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Технологии
 
-## Expanding the ESLint configuration
+- **React**: Библиотека для создания пользовательских интерфейсов.
+- **TypeScript**: Надстройка над JavaScript, добавляющая статическую типизацию.
+- **Vite**: Современный инструмент для сборки проектов, обеспечивающий быструю разработку.
+- **CSS Modules**: Методология для модульной организации стилей.
+- **useState**
+- **useEffect**
+- **Reducer**
+- **Context**
+- **useRef**
+- **forwardRef**
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Установка и запуск
 
-- Configure the top-level `parserOptions` property like this:
+### Предварительные требования
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+1. Убедитесь, что у вас установлен [Node.js](https://nodejs.org/) версии 14 или выше.
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### Шаги по установке
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+1. Клонируйте репозиторий на локальный компьютер:
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+   ```bash
+   git clone https://github.com/yourusername/sushi-restaurant.git
+   cd sushi-restaurant
+
+2. Установите зависимостей
+  npm install
+
+3. Запустите проект
+  npm run dev
+
+
+## Структура компонентов
+
+Header: Шапка приложения.
+HeaderCartButton - Кнопка для отображения корзины
+PromoText: Отображает информацию о ресторане и его особенностях.
+MealsList: Список доступных блюд, отображаемых с использованием компонента MealsItem.
+MealsItem: Каждый элемент списка блюд, содержащий информацию о блюде и форму для выбора количества.
+MealItemForm: Форма для ввода количества блюда, которое пользователь хочет добавить в корзину.
+Cart: Отображает содержимое корзины с возможностью добавления и удаления блюд.
+CartItem: Каждый элемент корзины с возможностью управления количеством.
+Modal: Компонент для отображения модального окна, используемого для корзины.
+
+src/
+│
+├── components/
+│ ├── Cart/
+| | ├──Cart
+| | ├──CartItem/
+| | | └──CartItem
+| ├── Layout/
+| | ├──Header/
+| | | └──Header
+| | ├──HeaderCartButton/
+| | └──HeaderCartButton
+│ ├── Meals/
+│ │ ├── Meals
+| | ├──MealItemForm/
+| | | └──MealItemForm
+| | ├──MealItem/
+| | | └──MealItem
+| | ├──MealList/
+| | | └──MealList
+| | └──PromoText/
+| | └──PromoText
+│ ├── UI/
+| | ├──Card/
+| | | └──Card
+| | ├──Input/
+| | | └──Input
+| | └──Modal/
+| └ └──Modal
+│
+├── store/
+│ ├── cart-context/
+| | ├──cart-context
+| └ └──CartContextProvider
+│
+├── App.tsx
+└── main.tsx

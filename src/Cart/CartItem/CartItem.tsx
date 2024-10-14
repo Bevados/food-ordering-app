@@ -1,23 +1,15 @@
-import { CartItemProps } from '../Cart.types'
+import { CartItemProps } from '..'
 import styles from './CartItem.module.css'
 
-// interface Item {
-// 	id: string
-// 	name: string
-// 	amount: number
-// 	price: number
-// }
-
-// interface CartItemProps {
-// 	id: string
-// 	price: number
-// 	name: string
-// 	amount: number
-// 	onRemove: (id: string) => void
-// 	onAdd: (item: Item) => void
-// }
-
-
+/**
+ * Компонент CartItem.
+ *
+ * Отображает отдельный элемент в корзине покупок.
+ * Позволяет пользователю увеличивать или уменьшать количество данного элемента.
+ *
+ * @param {CartItemProps} props - Пропсы компонента, содержащие информацию о товаре в корзине.
+ * @returns {JSX.Element} Элемент корзины с возможностью управления количеством.
+ */
 const CartItem = ({ id, price, name, amount, onRemove, onAdd }: CartItemProps) => {
 	const priceCart = `$${price.toFixed(2)}`
 
