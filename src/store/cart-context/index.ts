@@ -18,6 +18,7 @@ export interface CartContextType {
 	totalAmount: number
 	addItem: (item: Item) => void
 	removeItem: (id: string) => void
+	clearCart: () => void
 }
 
 /**
@@ -46,4 +47,7 @@ export type CartActionReducer =
 	| {
 			type: 'REMOVE_ITEM'
 			id: string
+	  }
+	| {
+			type: 'CLEAR_CART'
 	  }
