@@ -114,8 +114,6 @@ const CartContextProvider = ({ children }: CartContextProviderProps) => {
 		dispatchCartState({ type: 'CLEAR_CART' })
 	}
 
-
-
 	const cartContext: CartContextType = {
 		items: cartState.items,
 		totalAmount: cartState.totalAmount,
