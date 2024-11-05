@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react'
 import Modal from '../UI/Modal/Modal'
 import CartContext from '../store/cart-context/cart-context'
-import { CartProps, Item } from '.'
+import { CartProps, Item, UserData } from '.'
 import styles from './Cart.module.css'
 import CartItem from './CartItem/CartItem'
 import SubmitOrder from './SubmitOrder/SubmitOrder'
@@ -17,6 +17,9 @@ import SubmitOrder from './SubmitOrder/SubmitOrder'
  */
 const Cart = ({ onHideCart }: CartProps): JSX.Element => {
 	const [formAddressIsOpen, setFormAddressIsOpen] = useState<boolean>(false)
+	const [isDataSubmitting, setIsDataSubmitting] = useState<boolean>(false)
+	const [wasDataSendingSuccessful, setWasDataSendingSuccessful] =
+		useState<boolean>(false)
 	const cartContext = useContext(CartContext)
 
 	const totalAmount = `$${Math.abs(cartContext.totalAmount).toFixed(2)}`
@@ -43,7 +46,40 @@ const Cart = ({ onHideCart }: CartProps): JSX.Element => {
 	 */
 	const orderHandler = () => {
 		setFormAddressIsOpen(true)
-		// cartContext.clearCart()
+	}
+
+	/**
+	 * Отправка данных пользователя на сервер.
+	 */
+	const submitOrderHandler = async (userData: UserData) => {
+		setIsDataSubmitting(true)
+			try {
+			const response = await fetch(
+				'https://react-http-1020c-default-rtdb.firebaseio.com/orders.json',
+				{
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({
+						user: userData,
+						ordersMeals: cartContext.items
+					})
+				}
+			)
+
+			if (!response.ok) {
+				throw new Error('Ошибка отправки данных')
+			}
+
+			console.log('Заказ успешно отправлен')
+		} catch (error) {
+			console.error('Ошибка при отправке данных:', error)
+			setIsDataSubmitting(false)
+		}
+		setIsDataSubmitting(false)
+		setWasDataSendingSuccessful(true)
+		cartContext.clearCart();
 	}
 
 	const cartItems = (
@@ -62,15 +98,17 @@ const Cart = ({ onHideCart }: CartProps): JSX.Element => {
 		</ul>
 	)
 
-	return (
-		<Modal onHideCart={onHideCart}>
+	const cartModalContent = (
+		<>
 			{cartItems}
 			<div className={styles.total}>
 				<span>Итого</span>
 				<span>{totalAmount}</span>
 			</div>
 
-			{formAddressIsOpen && <SubmitOrder onCancel={onHideCart} />}
+			{formAddressIsOpen && (
+				<SubmitOrder onCancel={onHideCart} onSubmit={submitOrderHandler} />
+			)}
 
 			{!formAddressIsOpen && (
 				<div className={styles.actions}>
@@ -84,6 +122,26 @@ const Cart = ({ onHideCart }: CartProps): JSX.Element => {
 					)}
 				</div>
 			)}
+		</>
+	)
+
+	const dataSubmittingCartModalContent = <p>Отправка данных заказа...</p>
+	const dataWasSubmittedCartModalContent = (
+		<>
+			<p>Ваш заказ успешно отправлен!</p>
+			<div className={styles.actions}>
+				<button className={styles['button--alt']} onClick={onHideCart}>
+					Закрыть
+				</button>
+			</div>
+		</>
+	)
+
+	return (
+		<Modal onHideCart={onHideCart}>
+			{!isDataSubmitting && !wasDataSendingSuccessful && cartModalContent}
+			{isDataSubmitting && dataSubmittingCartModalContent}
+			{wasDataSendingSuccessful && dataWasSubmittedCartModalContent}
 		</Modal>
 	)
 }

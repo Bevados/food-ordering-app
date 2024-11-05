@@ -13,7 +13,8 @@ const CartContext = createContext<CartContextType>({
 	},
 	removeItem: _id => {
 		void _id // Заглушка
-	}
+	},
+	clearCart: () => {}
 })
 
 export default CartContext

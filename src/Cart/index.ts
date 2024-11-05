@@ -40,3 +40,10 @@ export interface CartItemProps extends Item {
 	onRemove: (id: string) => void
 	onAdd: (item: Item) => void
 }
+
+
+export interface UserData {
+	name: string
+	city: string
+	address: string
+}

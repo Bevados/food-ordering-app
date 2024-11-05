@@ -1,0 +1,7 @@
+{
+	"entryPoints": ["src/main.tsx"],
+	"out": "docs",
+	"includeVersion": true,
+	"excludePrivate": true,
+	"excludeExternals": true
+}
